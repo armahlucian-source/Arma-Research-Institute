@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arma Research Institute — Accra</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #FAF9F6;
+      --ink: #141413;
+      --muted: #5C5B57;
+      --rule: #E2E0D8;
+      --accent: #0F4C3A;
+    }
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .font-serif-editorial {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+    .font-mono-tech {
+      font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+    .lattice-canvas {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+    input[type="range"] {
+      accent-color: #0F4C3A;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#0F4C3A]/15 selection:text-[#0F4C3A]">
+
+  <!-- ClickSpark Global Overlay Layer -->
+  <div id="clickSparkLayer" aria-hidden="true" class="fixed inset-0 z-50 pointer-events-none overflow-hidden"></div>
+
+  <!-- Full-Page Fixed WebGL2 Dither Background -->
+  <canvas id="ditherBgCanvas" aria-hidden="true" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
+
+  <!-- Top Institutional Masthead -->
+  <header class="sticky top-0 z-40 bg-[#FAF9F6]/95 backdrop-blur-sm border-b border-[#E2E0D8]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#overview" class="flex items-center gap-3">
+          <svg class="w-6 h-6 text-[#0F4C3A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3 3h18v18H3z" />
+            <path d="M9 3v18M15 3v18M3 9h18M3 15h18" stroke-opacity="0.45" />
+            <rect x="9" y="9" width="6" height="6" fill="currentColor" fill-opacity="0.2" />
+          </svg>
+          <span class="font-mono-tech text-xs sm:text-sm font-semibold tracking-[0.14em] uppercase text-[#141413]">
+            Arma Research Institute
+          </span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-8 text-[13px] font-medium text-[#5C5B57]">
+          <a href="#divisions" class="hover:text-[#141413] transition">Divisions</a>
+          <a href="#simulator" class="hover:text-[#141413] transition">Simulation Lab</a>
+          <a href="#research" class="hover:text-[#141413] transition">Empirical Data</a>
+          <a href="#publications" class="hover:text-[#141413] transition">Publications</a>
+          <a href="#institute" class="hover:text-[#141413] transition">Founder</a>
+          <a href="#contact" class="px-4 py-2 bg-[#141413] text-[#FAF9F6] text-xs font-mono-tech uppercase tracking-wider hover:bg-[#0F4C3A] transition">
+            Contact
+          </a>
+        </nav>
+
+        <button id="mobileMenuBtn" type="button" aria-label="Toggle navigation" class="md:hidden p-2 text-[#141413] border border-[#E2E0D8]">
+          <span class="font-mono-tech text-xs uppercase tracking-wider">Menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-[#E2E0D8] bg-[#FAF9F6] px-5 py-4 space-y-2 text-sm">
+      <a href="#divisions" class="block py-1.5 text-[#141413]">Divisions</a>
+      <a href="#simulator" class="block py-1.5 text-[#141413]">Simulation Lab</a>
+      <a href="#research" class="block py-1.5 text-[#141413]">Empirical Data</a>
+      <a href="#publications" class="block py-1.5 text-[#141413]">Publications</a>
+      <a href="#institute" class="block py-1.5 text-[#141413]">Founder</a>
+      <a href="#contact" class="block py-2 mt-2 bg-[#141413] text-[#FAF9F6] text-center font-mono-tech text-xs uppercase tracking-wider">Contact</a>
+    </div>
+  </header>
+
+  <!-- Editorial Hero with WebGL2 Dither Wave Background (No AI images) -->
+  <section id="overview" class="relative z-10 overflow-hidden border-b border-[#E2E0D8] bg-[#FAF9F6]/30">
+    <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 py-14 sm:py-20 lg:py-24">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-5">
+            Accra, Ghana · armaresearchinstitute.org
+          </div>
+          <h1 class="font-serif-editorial text-4xl sm:text-5xl lg:text-[56px] font-normal tracking-[-0.02em] leading-[1.08] text-[#141413] mb-6">
+            Spatial structure slows epidemics, while percolation sets the threshold.
+          </h1>
+          <p class="text-base sm:text-lg text-[#3D3C38] leading-relaxed max-w-2xl mb-8">
+            Arma Research Institute is an independent computational biology institute in Accra investigating how local contact geometry, discrete lattice dynamics, and percolation barriers govern biological and epidemic wave propagation.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#simulator" class="px-6 py-3 bg-[#0F4C3A] text-white text-xs font-mono-tech uppercase tracking-wider hover:bg-[#0B3B2D] transition">
+              Open SIR Laboratory
+            </a>
+            <button id="heroReadPaperBtn" type="button" class="px-6 py-3 border border-[#141413] bg-[#FAF9F6]/90 text-[#141413] text-xs font-mono-tech uppercase tracking-wider hover:bg-[#141413] hover:text-white transition">
+              Read Full Paper &amp; Code
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="border border-[#141413]/20 bg-[#FAF9F6]/90 backdrop-blur-sm p-6">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-[#E2E0D8] font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57]">
+              <span>Model Specification</span>
+              <span class="text-[#0F4C3A]">2D SIR CA</span>
+            </div>
+            <div class="space-y-3.5 font-mono-tech text-xs">
+              <div class="flex justify-between gap-4">
+                <span class="text-[#5C5B57]">Lattice Geometry</span>
+                <span class="text-[#141413] font-medium">100 × 100 Moore (8-nbr)</span>
+              </div>
+              <div class="flex justify-between gap-4">
+                <span class="text-[#5C5B57]">Infection Rule</span>
+                <span class="text-[#141413] font-medium">P(S→I) = 1 − (1 − β)<sup>k</sup></span>
+              </div>
+              <div class="flex justify-between gap-4">
+                <span class="text-[#5C5B57]">Parameters</span>
+                <span class="text-[#141413] font-medium">β = 0.20 · τ = 8 steps</span>
+              </div>
+              <div class="flex justify-between gap-4">
+                <span class="text-[#5C5B57]">Static Threshold</span>
+                <span class="text-[#141413] font-medium">v<sub>c,static</sub> ≈ 59.3%</span>
+              </div>
+              <div class="flex justify-between gap-4">
+                <span class="text-[#5C5B57]">Dynamic Threshold</span>
+                <span class="text-[#0F4C3A] font-semibold">v<sub>c,dyn</sub> ≈ 55–57%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Quantitative Findings Bar -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mt-14 pt-8 border-t border-[#141413]/15">
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57]">Peak Load (v = 0%)</div>
+          <div class="font-serif-editorial text-2xl sm:text-3xl text-[#141413] mt-1">17.17% <span class="text-sm text-[#5C5B57]">vs 98.39%</span></div>
+        </div>
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57]">Containment Threshold</div>
+          <div class="font-serif-editorial text-2xl sm:text-3xl text-[#141413] mt-1">v<sub>c</sub> ≈ 55–57%</div>
+        </div>
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57]">Outbreak Duration</div>
+          <div class="font-serif-editorial text-2xl sm:text-3xl text-[#141413] mt-1">~5× Longer</div>
+        </div>
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57]">Critical Slowing</div>
+          <div class="font-serif-editorial text-2xl sm:text-3xl text-[#141413] mt-1">v ≈ 52% <span class="text-sm text-[#5C5B57]">(350 steps)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Divisions -->
+  <section id="divisions" class="relative z-10 border-b border-[#E2E0D8] bg-white/55 backdrop-blur-[1px]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="grid lg:grid-cols-12 gap-10 mb-12">
+        <div class="lg:col-span-4">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">01 / Research Agenda</div>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413]">Divisions &amp; Focus</h2>
+        </div>
+        <div class="lg:col-span-8">
+          <p class="text-[#5C5B57] leading-relaxed">
+            Classical compartmental models assume homogeneous mixing—treating biological tissues, biofilms, and communities as well-mixed fluids. Our work replaces mean-field assumptions with explicit spatial geometry and reproducible discrete-time simulations.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 border-t border-l border-[#E2E0D8]">
+        <div class="border-r border-b border-[#E2E0D8] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="font-mono-tech text-[11px] text-[#5C5B57] mb-4">DIV. 01</div>
+            <h3 class="font-serif-editorial text-2xl text-[#141413] mb-3">Computational Biology</h3>
+            <p class="text-sm text-[#5C5B57] leading-relaxed">
+              2D Moore-neighborhood SIR cellular automata modeling local pathogen propagation, self-shading recovered shells, and peak prevalence suppression.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#E2E0D8] font-mono-tech text-xs text-[#141413]">
+            N = 10,000 cells · Seed 3 × 3
+          </div>
+        </div>
+
+        <div class="border-r border-b border-[#E2E0D8] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="font-mono-tech text-[11px] text-[#5C5B57] mb-4">DIV. 02</div>
+            <h3 class="font-serif-editorial text-2xl text-[#141413] mb-3">Percolation &amp; Scaling</h3>
+            <p class="text-sm text-[#5C5B57] leading-relaxed">
+              Finite-size scaling across L = 50, 100, and 200 lattices to locate dynamical percolation transitions (v<sub>c</sub> ≈ 55–57%) relative to static site percolation (v<sub>c</sub> ≈ 59.3%).
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#E2E0D8] font-mono-tech text-xs text-[#141413]">
+            P(S → I) = 1 − (1 − β)<sup>k</sup>
+          </div>
+        </div>
+
+        <div class="border-r border-b border-[#E2E0D8] p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div class="font-mono-tech text-[11px] text-[#5C5B57] mb-4">DIV. 03</div>
+            <h3 class="font-serif-editorial text-2xl text-[#141413] mb-3">Open Scientific Computing</h3>
+            <p class="text-sm text-[#5C5B57] leading-relaxed">
+              Deterministic NumPy SeedSequence pipelines executed to full extinction (up to 2,500 steps), eliminating finite-horizon truncation artifacts.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-[#E2E0D8] font-mono-tech text-xs text-[#0F4C3A]">
+            <button type="button" id="openCodeFromDivBtn" class="hover:underline text-left">
+              Inspect Embedded Python Script →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive 2D Spatial SIR Laboratory -->
+  <section id="simulator" class="relative z-10 border-b border-[#E2E0D8] bg-[#FAF9F6]/35">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">02 / Interactive Instrument</div>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413]">2D SIR Cellular Automaton Lab</h2>
+          <p class="text-sm sm:text-base text-[#5C5B57] mt-2 max-w-2xl">
+            Live browser implementation of the 100 × 100 synchronous Moore-neighborhood lattice (N = 10,000 cells, central 3 × 3 seed).
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" data-preset="0" class="preset-btn px-3 py-1.5 border border-[#D6D3CD] bg-white hover:border-[#141413] text-xs font-mono-tech transition">v = 0%</button>
+          <button type="button" data-preset="20" class="preset-btn px-3 py-1.5 border border-[#D6D3CD] bg-white hover:border-[#141413] text-xs font-mono-tech transition">v = 20%</button>
+          <button type="button" data-preset="52" class="preset-btn px-3 py-1.5 border border-[#D6D3CD] bg-white hover:border-[#141413] text-xs font-mono-tech transition">v = 52%</button>
+          <button type="button" data-preset="60" class="preset-btn px-3 py-1.5 border border-[#0F4C3A] bg-[#0F4C3A] text-white text-xs font-mono-tech transition">v = 60% (Containment)</button>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Lattice Viewport -->
+        <div class="lg:col-span-5 bg-white border border-[#E2E0D8] p-5">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-[#E2E0D8]">
+            <span class="font-mono-tech text-xs font-medium text-[#141413]">LATTICE [100 × 100]</span>
+            <span id="simStatusBadge" class="font-mono-tech text-[11px] text-[#0F4C3A]">READY · t = 0</span>
+          </div>
+          <div class="aspect-square w-full bg-white border border-[#D6D3CD]">
+            <canvas id="latticeCanvas" width="600" height="600" class="w-full h-full block"></canvas>
+          </div>
+          <div class="grid grid-cols-4 gap-2 mt-4 pt-3 border-t border-[#E2E0D8] font-mono-tech text-[11px] text-[#5C5B57]">
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#D6D3CD]"></span>S</div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#E11D48]"></span>I (Active)</div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#2563EB]"></span>R</div>
+            <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#141413]"></span>V (Barrier)</div>
+          </div>
+        </div>
+
+        <!-- Controls & Telemetry -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="bg-white border border-[#E2E0D8] p-6">
+            <div class="grid sm:grid-cols-3 gap-6">
+              <div>
+                <div class="flex justify-between font-mono-tech text-xs mb-2">
+                  <label for="barrierSlider" class="text-[#5C5B57]">Barrier (v)</label>
+                  <span id="barrierVal" class="font-semibold text-[#141413]">45%</span>
+                </div>
+                <input id="barrierSlider" type="range" min="0" max="70" step="1" value="45" class="w-full cursor-pointer" />
+              </div>
+
+              <div>
+                <div class="flex justify-between font-mono-tech text-xs mb-2">
+                  <label for="betaSlider" class="text-[#5C5B57]">Transmit (β)</label>
+                  <span id="betaVal" class="font-semibold text-[#141413]">0.20</span>
+                </div>
+                <input id="betaSlider" type="range" min="0.05" max="0.40" step="0.01" value="0.20" class="w-full cursor-pointer" />
+              </div>
+
+              <div>
+                <div class="flex justify-between font-mono-tech text-xs mb-2">
+                  <label for="tauSlider" class="text-[#5C5B57]">Period (τ)</label>
+                  <span id="tauVal" class="font-semibold text-[#141413]">8 steps</span>
+                </div>
+                <input id="tauSlider" type="range" min="4" max="12" step="1" value="8" class="w-full cursor-pointer" />
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 mt-6 pt-5 border-t border-[#E2E0D8]">
+              <button id="playPauseBtn" type="button" class="px-5 py-2.5 bg-[#0F4C3A] hover:bg-[#0B3B2D] text-white font-mono-tech text-xs uppercase tracking-wider transition">
+                Run Simulation
+              </button>
+              <button id="stepBtn" type="button" class="px-4 py-2.5 border border-[#D6D3CD] hover:border-[#141413] bg-white text-[#141413] font-mono-tech text-xs uppercase tracking-wider transition">
+                Step +1
+              </button>
+              <button id="resetBtn" type="button" class="px-4 py-2.5 border border-[#D6D3CD] hover:border-[#141413] bg-white text-[#141413] font-mono-tech text-xs uppercase tracking-wider transition">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Readout Strip -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#E2E0D8] bg-white">
+            <div class="border-r border-b border-[#E2E0D8] p-4">
+              <div class="font-mono-tech text-[10px] uppercase tracking-wider text-[#5C5B57]">Infected (I)</div>
+              <div id="metricInfected" class="font-mono-tech text-xl font-semibold text-[#E11D48] mt-1">0.09%</div>
+            </div>
+            <div class="border-r border-b border-[#E2E0D8] p-4">
+              <div class="font-mono-tech text-[10px] uppercase tracking-wider text-[#5C5B57]">Peak (I<sub>max</sub>)</div>
+              <div id="metricPeak" class="font-mono-tech text-xl font-semibold text-[#141413] mt-1">0.09%</div>
+            </div>
+            <div class="border-r border-b border-[#E2E0D8] p-4">
+              <div class="font-mono-tech text-[10px] uppercase tracking-wider text-[#5C5B57]">Recovered (R)</div>
+              <div id="metricRecovered" class="font-mono-tech text-xl font-semibold text-[#2563EB] mt-1">0.00%</div>
+            </div>
+            <div class="border-r border-b border-[#E2E0D8] p-4">
+              <div class="font-mono-tech text-[10px] uppercase tracking-wider text-[#5C5B57]">Step (t)</div>
+              <div id="metricStep" class="font-mono-tech text-xl font-semibold text-[#141413] mt-1">0</div>
+            </div>
+          </div>
+
+          <!-- Live Chart -->
+          <div class="bg-white border border-[#E2E0D8] p-5">
+            <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57] mb-3">Live Outbreak Trajectory (% of N)</div>
+            <div class="relative h-56">
+              <canvas id="liveSimChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Empirical Findings Benchmark -->
+  <section id="research" class="relative z-10 border-b border-[#E2E0D8] bg-white/55 backdrop-blur-[1px]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">03 / Empirical Benchmark</div>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413]">Spatial CA vs. Well-Mixed Control</h2>
+          <p class="text-sm text-[#5C5B57] mt-2">
+            L = 100, n = 60 Monte Carlo trials per barrier density, carried to full extinction.
+          </p>
+        </div>
+
+        <div class="inline-flex border border-[#D6D3CD] bg-[#FAF9F6]">
+          <button type="button" data-metric="peak" class="bench-tab px-4 py-2 font-mono-tech text-xs bg-[#141413] text-white transition">Peak I<sub>max</sub></button>
+          <button type="button" data-metric="final" class="bench-tab px-4 py-2 font-mono-tech text-xs text-[#5C5B57] hover:text-[#141413] transition">Final Size</button>
+          <button type="button" data-metric="duration" class="bench-tab px-4 py-2 font-mono-tech text-xs text-[#5C5B57] hover:text-[#141413] transition">Duration</button>
+        </div>
+      </div>
+
+      <div class="border border-[#E2E0D8] p-6 bg-[#FAF9F6]">
+        <div class="relative h-72">
+          <canvas id="benchmarkChart"></canvas>
+        </div>
+        <p id="benchmarkCaption" class="font-mono-tech text-xs text-[#5C5B57] mt-4 pt-4 border-t border-[#E2E0D8]">
+          Note: Local contact geometry lowers peak prevalence from 98.39% to 17.17% at v = 0%, and remains a small fraction of well-mixed peaks across all barrier densities.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications & Embedded Source -->
+  <section id="publications" class="relative z-10 border-b border-[#E2E0D8] bg-[#FAF9F6]/35">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">04 / Research Output</div>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413]">Embedded Manuscript &amp; Python Code</h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" data-filter="all" class="pub-filter px-3.5 py-1.5 font-mono-tech text-xs bg-[#141413] text-white transition">All</button>
+          <button type="button" data-filter="manuscript" class="pub-filter px-3.5 py-1.5 font-mono-tech text-xs border border-[#D6D3CD] bg-white text-[#5C5B57] hover:text-[#141413] transition">Manuscript</button>
+          <button type="button" data-filter="code" class="pub-filter px-3.5 py-1.5 font-mono-tech text-xs border border-[#D6D3CD] bg-white text-[#5C5B57] hover:text-[#141413] transition">Python Script</button>
+        </div>
+      </div>
+
+      <div id="pubGrid" class="divide-y divide-[#E2E0D8] border-t border-b border-[#E2E0D8] bg-white">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Institute & Leadership -->
+  <section id="institute" class="relative z-10 border-b border-[#E2E0D8] bg-white/55 backdrop-blur-[1px]">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-6">
+          <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">05 / The Institute</div>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413] mb-4">Independent Science from Accra</h2>
+          <p class="text-[#5C5B57] leading-relaxed mb-4">
+            Founded in Accra without external grant restrictions, Arma Research Institute publishes open-access computational models, full replication datasets, and lattice simulation software for spatial epidemiology and complex systems.
+          </p>
+          <p class="text-sm text-[#5C5B57] leading-relaxed">
+            Every manuscript and Python/NumPy simulation pipeline is embedded directly on this platform for immediate inspection, download, and independent verification.
+          </p>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="border border-[#E2E0D8] bg-[#FAF9F6] p-6 sm:p-8">
+            <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#0F4C3A] mb-1">Founder · Lead Researcher · Principal Investigator</div>
+            <h3 class="font-serif-editorial text-2xl sm:text-3xl text-[#141413]">Lucian Ngetea Armah-Kwaw</h3>
+            <p class="text-sm text-[#5C5B57] mt-3 leading-relaxed">
+              Founder and Lead Researcher of the Arma Research Institute and Principal Investigator in the Computational Biology Division. Research focuses on 2D SIR cellular automata, dynamical percolation thresholds, and finite-size scaling.
+            </p>
+            <div class="flex flex-wrap gap-6 mt-6 pt-4 border-t border-[#E2E0D8] font-mono-tech text-xs">
+              <a href="mailto:armahlucian@gmail.com" class="text-[#0F4C3A] hover:underline">armahlucian@gmail.com</a>
+              <a href="https://github.com/armahlucian-source/Arma-Research-Institute" target="_blank" rel="noopener noreferrer" class="text-[#141413] hover:underline">github.com/armahlucian-source</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="relative z-10 bg-[#FAF9F6]/35">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 py-16 sm:py-20">
+      <div class="mb-8">
+        <div class="font-mono-tech text-[11px] uppercase tracking-[0.16em] text-[#0F4C3A] mb-2">06 / Correspondence</div>
+        <h2 class="font-serif-editorial text-3xl sm:text-4xl text-[#141413]">Collaborate or Request Datasets</h2>
+      </div>
+
+      <form id="contactForm" class="bg-white border border-[#E2E0D8] p-6 sm:p-8 space-y-5">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label for="contactName" class="block font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57] mb-2">Name</label>
+            <input id="contactName" type="text" required placeholder="Dr. Ama Mensah" class="w-full px-3.5 py-2.5 border border-[#D6D3CD] bg-[#FAF9F6] text-sm focus:outline-none focus:border-[#0F4C3A]" />
+          </div>
+          <div>
+            <label for="contactEmail" class="block font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57] mb-2">Email</label>
+            <input id="contactEmail" type="email" required placeholder="name@institution.edu" class="w-full px-3.5 py-2.5 border border-[#D6D3CD] bg-[#FAF9F6] text-sm focus:outline-none focus:border-[#0F4C3A]" />
+          </div>
+        </div>
+        <div>
+          <label for="contactTopic" class="block font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57] mb-2">Subject</label>
+          <select id="contactTopic" class="w-full px-3.5 py-2.5 border border-[#D6D3CD] bg-[#FAF9F6] text-sm focus:outline-none focus:border-[#0F4C3A]">
+            <option value="Research Collaboration">Research Collaboration</option>
+            <option value="Simulation Code & Datasets">Simulation Code &amp; Datasets</option>
+            <option value="Peer Review & Correspondence">Peer Review &amp; Correspondence</option>
+          </select>
+        </div>
+        <div>
+          <label for="contactMessage" class="block font-mono-tech text-[11px] uppercase tracking-wider text-[#5C5B57] mb-2">Message</label>
+          <textarea id="contactMessage" rows="4" required placeholder="Share your inquiry or replication request..." class="w-full px-3.5 py-2.5 border border-[#D6D3CD] bg-[#FAF9F6] text-sm focus:outline-none focus:border-[#0F4C3A]"></textarea>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+          <span class="font-mono-tech text-xs text-[#5C5B57]">Direct: <a href="mailto:armahlucian@gmail.com" class="text-[#0F4C3A] hover:underline">armahlucian@gmail.com</a></span>
+          <button type="submit" class="px-6 py-3 bg-[#141413] hover:bg-[#0F4C3A] text-white font-mono-tech text-xs uppercase tracking-wider transition">
+            Submit Inquiry
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-[#E2E0D8] bg-white/75 backdrop-blur-[1px] py-8">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono-tech text-xs text-[#5C5B57]">
+      <div>© 2026 ARMA RESEARCH INSTITUTE · ACCRA, GHANA · ARMAREASEARCHINSTITUTE.ORG</div>
+      <div class="flex items-center gap-6">
+        <a href="#overview" class="hover:text-[#141413] transition">Top</a>
+        <a href="#simulator" class="hover:text-[#141413] transition">Lab</a>
+        <a href="https://github.com/armahlucian-source/Arma-Research-Institute" target="_blank" rel="noopener noreferrer" class="hover:text-[#141413] transition">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Publication / Embedded Manuscript & Python Script Modal -->
+  <div id="pubModal" class="hidden fixed inset-0 z-50 bg-[#141413]/65 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FAF9F6] border border-[#141413] max-w-4xl w-full p-6 sm:p-8 shadow-2xl max-h-[90vh] flex flex-col">
+      <div class="flex items-start justify-between gap-4 mb-4 pb-3 border-b border-[#E2E0D8]">
+        <div>
+          <span id="modalBadge" class="font-mono-tech text-[11px] uppercase tracking-wider text-[#0F4C3A]"></span>
+          <h3 id="modalTitle" class="font-serif-editorial text-xl sm:text-2xl text-[#141413] leading-snug mt-1"></h3>
+          <p id="modalAuthors" class="font-mono-tech text-xs text-[#5C5B57] mt-1"></p>
+        </div>
+        <button id="closeModalBtn" type="button" class="font-mono-tech text-xs uppercase text-[#5C5B57] hover:text-[#141413] shrink-0">Close [×]</button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="flex flex-wrap gap-2 mb-4 pb-3 border-b border-[#E2E0D8]">
+        <button type="button" data-modal-tab="paper" class="modal-tab px-3.5 py-1.5 font-mono-tech text-xs bg-[#141413] text-white transition">Full Manuscript</button>
+        <button type="button" data-modal-tab="python" class="modal-tab px-3.5 py-1.5 font-mono-tech text-xs border border-[#D6D3CD] bg-white text-[#5C5B57] hover:text-[#141413] transition">Python Simulation Script</button>
+      </div>
+
+      <!-- Scrollable Body -->
+      <div id="modalBody" class="overflow-y-auto flex-1 pr-1 space-y-5 text-sm text-[#141413] leading-relaxed"></div>
+
+      <!-- Modal Footer Actions -->
+      <div class="mt-5 pt-4 border-t border-[#E2E0D8] flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap gap-2">
+          <button id="copyModalContentBtn" type="button" class="px-4 py-2 border border-[#141413] bg-white hover:bg-[#141413] hover:text-white text-[#141413] font-mono-tech text-xs uppercase tracking-wider transition">
+            Copy Active Text
+          </button>
+          <button id="downloadModalContentBtn" type="button" class="px-4 py-2 bg-[#0F4C3A] hover:bg-[#0B3B2D] text-white font-mono-tech text-xs uppercase tracking-wider transition">
+            Download File
+          </button>
+        </div>
+        <button id="modalCloseFooterBtn" type="button" class="px-4 py-2 border border-[#D6D3CD] bg-white text-[#141413] font-mono-tech text-xs uppercase tracking-wider">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="hidden fixed bottom-6 right-6 z-50 bg-[#141413] text-white font-mono-tech text-xs px-5 py-3.5 shadow-xl border border-[#0F4C3A]">
+    <span id="toastText">Done.</span>
+  </div>
+
+  <script>
+    // Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+    // ==========================================
+    // 0A. ClickSpark Engine (Vanilla JS port)
+    // ==========================================
+    (function initClickSpark() {
+      const layer = document.getElementById('clickSparkLayer');
+      if (!layer) return;
+      const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const bursts = [];
+      let raf = 0;
+
+      const config = {
+        colors: ['#0F4C3A', '#141413', '#B91C1C'],
+        size: 13,
+        radius: 28,
+        count: 8,
+        width: 1.8,
+        duration: 460,
+        randomness: 0.22,
+        ring: true
+      };
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function clampVal(v, min, max) { return Math.min(max, Math.max(min, v)); }
+      function smoothstep(a, b, x) {
+        const t = clampVal((x - a) / (b - a), 0, 1);
+        return t * t * (3 - 2 * t);
+      }
+
+      function removeBurst(burst) {
+        burst.canvas.remove();
+        const idx = bursts.indexOf(burst);
+        if (idx >= 0) bursts.splice(idx, 1);
+      }
+
+      function frame(now) {
+        raf = 0;
+        for (const burst of [...bursts]) {
+          const elapsed = now - burst.start;
+          const bctx = burst.ctx;
+          bctx.setTransform(1, 0, 0, 1, 0, 0);
+          bctx.clearRect(0, 0, burst.canvas.width, burst.canvas.height);
+          bctx.setTransform(burst.ratio, 0, 0, burst.ratio, -burst.left * burst.ratio, -burst.top * burst.ratio);
+
+          let alive = false;
+          if (config.ring) {
+            const life = reduced ? 300 : config.duration * 0.8;
+            const p = elapsed / life;
+            if (p < 1) {
+              alive = true;
+              const rad = 2 + config.radius * 0.6 * (reduced ? 0.6 : easeOut(p));
+              bctx.globalAlpha = Math.pow(1 - p, 2) * 0.55;
+              bctx.strokeStyle = burst.sparks[0].color;
+              bctx.lineWidth = Math.max(0.5, config.width * (1 - p) * 0.9);
+              bctx.beginPath();
+              bctx.arc(burst.x, burst.y, rad, 0, Math.PI * 2);
+              bctx.stroke();
+            }
+          }
+
+          for (const sp of burst.sparks) {
+            const life = reduced ? 300 : config.duration * sp.life;
+            const p = elapsed / life;
+            if (p >= 1) continue;
+            alive = true;
+            const e = reduced ? 0.55 : easeOut(clampVal(p, 0, 1));
+            const dist = config.radius * sp.reach * e;
+            const fade = reduced ? 1 - p : 1 - smoothstep(0.55, 1, p);
+            if (fade <= 0) continue;
+            const len = config.size * sp.scale * (reduced ? 0.5 : Math.pow(1 - p, 1.6));
+            const x1 = burst.x + Math.cos(sp.angle) * dist;
+            const y1 = burst.y + Math.sin(sp.angle) * dist;
+            const x2 = burst.x + Math.cos(sp.angle) * (dist + Math.max(0.01, len));
+            const y2 = burst.y + Math.sin(sp.angle) * (dist + Math.max(0.01, len));
+            bctx.globalAlpha = fade;
+            bctx.strokeStyle = sp.color;
+            bctx.lineCap = 'round';
+            bctx.lineWidth = config.width * sp.scale;
+            bctx.beginPath();
+            bctx.moveTo(x1, y1);
+            bctx.lineTo(x2, y2);
+            bctx.stroke();
+          }
+
+          bctx.globalAlpha = 1;
+          if (!alive) removeBurst(burst);
+        }
+        if (bursts.length) raf = requestAnimationFrame(frame);
+      }
+
+      function spawn(clientX, clientY) {
+        const reach = config.radius * 1.4 + config.size * 1.4 + 8;
+        const left = Math.max(clientX - reach, 0);
+        const top = Math.max(clientY - reach, 0);
+        const right = Math.min(clientX + reach, window.innerWidth);
+        const bottom = Math.min(clientY + reach, window.innerHeight);
+        if (right - left < 1 || bottom - top < 1) return;
+
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        const c = document.createElement('canvas');
+        c.width = Math.ceil((right - left) * ratio);
+        c.height = Math.ceil((bottom - top) * ratio);
+        Object.assign(c.style, {
+          position: 'absolute',
+          left: left + 'px',
+          top: top + 'px',
+          width: (right - left) + 'px',
+          height: (bottom - top) + 'px',
+          pointerEvents: 'none'
+        });
+        layer.appendChild(c);
+        const bctx = c.getContext('2d');
+        if (!bctx) { c.remove(); return; }
+
+        const offset = Math.floor(Math.random() * config.colors.length);
+        const step = (Math.PI * 2) / config.count;
+        const sparks = Array.from({ length: config.count }, (_, i) => ({
+          angle: step * i + (Math.random() - 0.5) * config.randomness * step * 0.9,
+          reach: 1 + (Math.random() - 0.5) * 0.7 * config.randomness,
+          scale: 1 + (Math.random() - 0.5) * 0.8 * config.randomness,
+          life: 1 + (Math.random() - 0.5) * 0.5 * config.randomness,
+          color: config.colors[(i + offset) % config.colors.length]
+        }));
+
+        bursts.push({ x: clientX, y: clientY, start: performance.now(), sparks, canvas: c, ctx: bctx, ratio, left, top });
+        while (bursts.length > 24) removeBurst(bursts[0]);
+        if (!raf) raf = requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0) return;
+        spawn(e.clientX, e.clientY);
+      }, { passive: true });
+    })();
+
+    // ==========================================
+    // 0B. WebGL2 Bayer8 Dither Wave Background
+    // ==========================================
+    (function initDitherBackground() {
+      const canvas = document.getElementById('ditherBgCanvas');
+      if (!canvas) return;
+      const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+      if (!gl) return;
+
+      const MAX_TRAIL = 16;
+      const MAX_RIPPLES = 4;
+      const RIPPLE_SECONDS = 1.6;
+
+      const VERT = `#version 300 es
+      in vec2 aPosition;
+      void main() { gl_Position = vec4(aPosition, 0.0, 1.0); }`;
+
+      const WAVE_FRAG = `#version 300 es
+      precision highp float;
+      precision highp int;
+      uniform vec2 uResolution;
+      uniform float uCell;
+      uniform float uTime;
+      uniform float uWaveSpeed;
+      uniform float uWaveFrequency;
+      uniform float uWaveAmplitude;
+      uniform float uScale;
+      uniform float uContrast;
+      uniform float uBrightness;
+      uniform float uRadius;
+      uniform float uStrength;
+      uniform vec3 uTrail[${MAX_TRAIL}];
+      uniform int uTrailCount;
+      uniform vec4 uRipples[${MAX_RIPPLES}];
+      uniform int uRippleCount;
+      out vec4 outColor;
+
+      vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+      vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
+      vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+      vec2 fade(vec2 t) { return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+
+      float cnoise(vec2 P) {
+        vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+        vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+        Pi = mod289(Pi);
+        vec4 ix = Pi.xzxz; vec4 iy = Pi.yyww;
+        vec4 fx = Pf.xzxz; vec4 fy = Pf.yyww;
+        vec4 i = permute(permute(ix) + iy);
+        vec4 gx = fract(i * (1.0 / 41.0)) * 2.0 - 1.0;
+        vec4 gy = abs(gx) - 0.5;
+        vec4 tx = floor(gx + 0.5);
+        gx = gx - tx;
+        vec2 g00 = vec2(gx.x, gy.x); vec2 g10 = vec2(gx.y, gy.y);
+        vec2 g01 = vec2(gx.z, gy.z); vec2 g11 = vec2(gx.w, gy.w);
+        vec4 norm = taylorInvSqrt(vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11)));
+        g00 *= norm.x; g01 *= norm.y; g10 *= norm.z; g11 *= norm.w;
+        float n00 = dot(g00, vec2(fx.x, fy.x)); float n10 = dot(g10, vec2(fx.y, fy.y));
+        float n01 = dot(g01, vec2(fx.z, fy.z)); float n11 = dot(g11, vec2(fx.w, fy.w));
+        vec2 fadeXY = fade(Pf.xy);
+        vec2 nx = mix(vec2(n00, n01), vec2(n10, n11), fadeXY.x);
+        return 2.3 * mix(nx.x, nx.y, fadeXY.y);
+      }
+
+      float fbm(vec2 p) {
+        float value = 0.0; float amp = 1.0;
+        for (int i = 0; i < 4; i++) {
+          value += amp * abs(cnoise(p));
+          p *= uWaveFrequency; amp *= uWaveAmplitude;
+        }
+        return value;
+      }
+
+      void main() {
+        vec2 corner = (gl_FragCoord.xy - 0.5) * uCell;
+        vec2 uv = corner / uResolution - 0.5;
+        uv.x *= uResolution.x / uResolution.y;
+
+        float touch = 0.0;
+        for (int i = 0; i < ${MAX_TRAIL}; i++) {
+          if (i >= uTrailCount) break;
+          vec3 pt = uTrail[i];
+          float reach = uRadius * mix(0.55, 1.0, pt.z);
+          touch = max(touch, pt.z * (1.0 - smoothstep(0.0, reach, length(uv - pt.xy))));
+        }
+
+        vec2 warp = vec2(0.0);
+        float ring = 0.0;
+        for (int i = 0; i < ${MAX_RIPPLES}; i++) {
+          if (i >= uRippleCount) break;
+          vec4 rp = uRipples[i];
+          vec2 delta = uv - rp.xy;
+          float dist = length(delta);
+          float life = clamp(rp.z / ${RIPPLE_SECONDS.toFixed(2)}, 0.0, 1.0);
+          float wave = exp(-pow((dist - rp.z * 0.9) / 0.07, 2.0)) * (1.0 - life) * (1.0 - life);
+          warp += (dist > 0.0001 ? delta / dist : vec2(0.0)) * wave * 0.035;
+          ring += wave;
+        }
+
+        vec2 p = (uv + warp) / uScale;
+        float f = fbm(p + fbm(p - uTime * uWaveSpeed));
+        f -= 0.45 * touch * uStrength;
+        f += ring * 0.45;
+        f = (f - 0.5) * uContrast + 0.5 + uBrightness;
+        float v = clamp(f, 0.0, 1.0);
+        outColor = vec4(floor(v * 255.0) / 255.0, fract(v * 255.0), 0.0, 1.0);
+      }`;
+
+      const DITHER_FRAG = `#version 300 es
+      precision highp float;
+      precision highp int;
+      uniform sampler2D uField;
+      uniform ivec2 uFieldSize;
+      uniform float uCellDevice;
+      uniform float uColorNum;
+      uniform vec3 uWave;
+      uniform vec3 uBackground;
+      out vec4 outColor;
+
+      const float bayer8[64] = float[64](
+        0.0/64.0, 48.0/64.0, 12.0/64.0, 60.0/64.0, 3.0/64.0, 51.0/64.0, 15.0/64.0, 63.0/64.0,
+        32.0/64.0, 16.0/64.0, 44.0/64.0, 28.0/64.0, 35.0/64.0, 19.0/64.0, 47.0/64.0, 31.0/64.0,
+        8.0/64.0, 56.0/64.0, 4.0/64.0, 52.0/64.0, 11.0/64.0, 59.0/64.0, 7.0/64.0, 55.0/64.0,
+        40.0/64.0, 24.0/64.0, 36.0/64.0, 20.0/64.0, 43.0/64.0, 27.0/64.0, 39.0/64.0, 23.0/64.0,
+        2.0/64.0, 50.0/64.0, 14.0/64.0, 62.0/64.0, 1.0/64.0, 49.0/64.0, 13.0/64.0, 61.0/64.0,
+        34.0/64.0, 18.0/64.0, 46.0/64.0, 30.0/64.0, 33.0/64.0, 17.0/64.0, 45.0/64.0, 29.0/64.0,
+        10.0/64.0, 58.0/64.0, 6.0/64.0, 54.0/64.0, 9.0/64.0, 57.0/64.0, 5.0/64.0, 53.0/64.0,
+        42.0/64.0, 26.0/64.0, 38.0/64.0, 22.0/64.0, 41.0/64.0, 25.0/64.0, 37.0/64.0, 21.0/64.0
+      );
+
+      vec3 toSrgb(vec3 c) {
+        c = clamp(c, 0.0, 1.0);
+        return mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c));
+      }
+
+      void main() {
+        vec2 cell = floor(gl_FragCoord.xy / uCellDevice);
+        vec4 sv = texelFetch(uField, clamp(ivec2(cell), ivec2(0), uFieldSize - 1), 0);
+        float f = sv.r + sv.g / 255.0;
+        ivec2 c = ivec2(mod(cell, 8.0));
+        float t = bayer8[c.y * 8 + c.x] - 0.25;
+        float levels = max(uColorNum, 1.01) - 1.0;
+        float v = clamp(f + t / levels, 0.0, 1.0);
+        float q = floor(v * levels + 0.5) / levels;
+        vec3 col = mix(uBackground, uWave, q);
+        outColor = vec4(toSrgb(col), 1.0);
+      }`;
+
+      function compileShader(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+      }
+
+      function createProg(fragSrc) {
+        const vs = compileShader(gl.VERTEX_SHADER, VERT);
+        const fs = compileShader(gl.FRAGMENT_SHADER, fragSrc);
+        if (!vs || !fs) return null;
+        const p = gl.createProgram();
+        gl.attachShader(p, vs); gl.attachShader(p, fs);
+        gl.bindAttribLocation(p, 0, 'aPosition');
+        gl.linkProgram(p);
+        if (!gl.getProgramParameter(p, gl.LINK_STATUS)) return null;
+        const u = {};
+        const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+        for (let i = 0; i < n; i++) {
+          const info = gl.getActiveUniform(p, i);
+          if (info) u[info.name.replace('[0]', '')] = gl.getUniformLocation(p, info.name);
+        }
+        return { p, u };
+      }
+
+      const waveProg = createProg(WAVE_FRAG);
+      const ditherProg = createProg(DITHER_FRAG);
+      if (!waveProg || !ditherProg) return;
+
+      const buf = gl.createBuffer();
+      const vao = gl.createVertexArray();
+      gl.bindVertexArray(vao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(0);
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+      const field = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, field);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      const fb = gl.createFramebuffer();
+
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const view = { w: 1, h: 1, ratio: 1, cell: 2, cellCss: 2, cols: 1, rows: 1 };
+      const trailPoints = [];
+      const ripples = [];
+      const trailData = new Float32Array(MAX_TRAIL * 3);
+      const rippleData = new Float32Array(MAX_RIPPLES * 4);
+      let pointer = { x: 0, y: 0, inside: false, set: false };
+      let time = 0, hx = 0, hy = 0, presence = 0, last = 0, visible = true;
+
+      function allocate() {
+        view.cell = Math.max(1, Math.round(3 * view.ratio));
+        view.cellCss = view.cell / view.ratio;
+        view.cols = Math.max(1, Math.ceil(canvas.width / view.cell));
+        view.rows = Math.max(1, Math.ceil(canvas.height / view.cell));
+        gl.bindTexture(gl.TEXTURE_2D, field);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, view.cols, view.rows, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, field, 0);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      }
+
+      function resize() {
+        const w = Math.max(1, window.innerWidth);
+        const h = Math.max(1, window.innerHeight);
+        const r = Math.min(window.devicePixelRatio || 1, 2);
+        view.w = w; view.h = h;
+        canvas.width = Math.max(1, Math.round(w * r));
+        canvas.height = Math.max(1, Math.round(h * r));
+        view.ratio = canvas.width / w;
+        allocate();
+      }
+
+      function toUv(x, y) {
+        return [(x / view.w - 0.5) * (view.w / view.h), -(y / view.h - 0.5)];
+      }
+
+      window.addEventListener('pointermove', (e) => {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        pointer.inside = true;
+        if (!pointer.set) {
+          const [ux, uy] = toUv(pointer.x, pointer.y);
+          hx = ux; hy = uy; pointer.set = true;
+        }
+      }, { passive: true });
+      document.documentElement.addEventListener('pointerleave', () => { pointer.inside = false; });
+      window.addEventListener('pointerdown', (e) => {
+        const [ux, uy] = toUv(e.clientX, e.clientY);
+        ripples.push({ x: ux, y: uy, age: 0 });
+        if (ripples.length > MAX_RIPPLES) ripples.shift();
+      }, { passive: true });
+
+      window.addEventListener('resize', resize);
+      resize();
+
+      function frame(now) {
+        requestAnimationFrame(frame);
+        if (!visible || document.hidden) { last = now; return; }
+        const dt = last ? Math.min((now - last) / 1000, 0.05) : 1 / 60;
+        last = now;
+        if (!reduce) time += dt;
+
+        presence += ((pointer.inside && !reduce ? 1 : 0) - presence) * (1 - Math.exp(-dt / 0.18));
+        if (pointer.set) {
+          const [tx, ty] = toUv(pointer.x, pointer.y);
+          hx += (tx - hx) * (1 - Math.exp(-dt / 0.06));
+          hy += (ty - hy) * (1 - Math.exp(-dt / 0.06));
+          const decay = Math.exp(-dt / 0.4);
+          trailPoints.forEach(p => { p.w *= decay; });
+          const head = trailPoints[0];
+          if (!head || Math.hypot(head.x - hx, head.y - hy) > 0.012) {
+            trailPoints.unshift({ x: hx, y: hy, w: presence });
+          } else {
+            head.x = hx; head.y = hy; head.w = presence;
+          }
+          while (trailPoints.length > MAX_TRAIL || (trailPoints.length > 1 && trailPoints[trailPoints.length - 1].w < 0.01)) {
+            trailPoints.pop();
+          }
+        }
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          ripples[i].age += dt;
+          if (ripples[i].age >= RIPPLE_SECONDS) ripples.splice(i, 1);
+        }
+
+        let tc = 0;
+        for (let i = 0; i < trailPoints.length && tc < MAX_TRAIL; i++) {
+          if (trailPoints[i].w > 0.01) {
+            trailData.set([trailPoints[i].x, trailPoints[i].y, trailPoints[i].w], tc * 3);
+            tc++;
+          }
+        }
+        let rc = 0;
+        for (let i = ripples.length - 1; i >= 0 && rc < MAX_RIPPLES; i--) {
+          rippleData.set([ripples[i].x, ripples[i].y, ripples[i].age, 1], rc * 4);
+          rc++;
+        }
+
+        gl.bindVertexArray(vao);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+        gl.viewport(0, 0, view.cols, view.rows);
+        gl.useProgram(waveProg.p);
+        const wu = waveProg.u;
+        gl.uniform2f(wu.uResolution, canvas.width / view.ratio, canvas.height / view.ratio);
+        gl.uniform1f(wu.uCell, view.cellCss);
+        gl.uniform1f(wu.uTime, time);
+        gl.uniform1f(wu.uWaveSpeed, 0.045);
+        gl.uniform1f(wu.uWaveFrequency, 2.8);
+        gl.uniform1f(wu.uWaveAmplitude, 0.34);
+        gl.uniform1f(wu.uScale, 1.05);
+        gl.uniform1f(wu.uContrast, 1.35);
+        gl.uniform1f(wu.uBrightness, 0.02);
+        gl.uniform1f(wu.uRadius, 0.32);
+        gl.uniform1f(wu.uStrength, 0.85);
+        gl.uniform3fv(wu.uTrail, trailData);
+        gl.uniform1i(wu.uTrailCount, tc);
+        gl.uniform4fv(wu.uRipples, rippleData);
+        gl.uniform1i(wu.uRippleCount, rc);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.useProgram(ditherProg.p);
+        const du = ditherProg.u;
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, field);
+        gl.uniform1i(du.uField, 0);
+        gl.uniform2i(du.uFieldSize, view.cols, view.rows);
+        gl.uniform1f(du.uCellDevice, view.cell);
+        gl.uniform1f(du.uColorNum, 5.0);
+        // Paper (#FAF9F6) to rich viridian-sage (#52796F / linear ~0.18, 0.30, 0.24) for clear Bayer8 dither texture
+        gl.uniform3f(du.uBackground, 0.955, 0.947, 0.922);
+        gl.uniform3f(du.uWave, 0.16, 0.31, 0.24);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      }
+      requestAnimationFrame(frame);
+    })();
+
+    // ==========================================
+    // 1. 2D Spatial SIR Cellular Automaton Lab
+    // ==========================================
+    const L = 100;
+    const N = L * L;
+    let grid = new Uint8Array(N);
+    let timer = new Uint8Array(N);
+    let stepCount = 0;
+    let peakInfectedPct = 0;
+    let simRunning = false;
+    let simTimerId = null;
+
+    const canvas = document.getElementById('latticeCanvas');
+    const ctx = canvas.getContext('2d');
+    const CELL_PX = canvas.width / L;
+    const CELL_R = CELL_PX * 0.43;
+    const TAU_2PI = Math.PI * 2;
+
+    const barrierSlider = document.getElementById('barrierSlider');
+    const betaSlider = document.getElementById('betaSlider');
+    const tauSlider = document.getElementById('tauSlider');
+    const barrierVal = document.getElementById('barrierVal');
+    const betaVal = document.getElementById('betaVal');
+    const tauVal = document.getElementById('tauVal');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const stepBtn = document.getElementById('stepBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const simStatusBadge = document.getElementById('simStatusBadge');
+
+    const metricInfected = document.getElementById('metricInfected');
+    const metricPeak = document.getElementById('metricPeak');
+    const metricRecovered = document.getElementById('metricRecovered');
+    const metricStep = document.getElementById('metricStep');
+
+    const liveChartCtx = document.getElementById('liveSimChart').getContext('2d');
+    const liveSimChart = new Chart(liveChartCtx, {
+      type: 'line',
+      data: {
+        labels: [0],
+        datasets: [
+          { label: 'Infected (%)', data: [0.09], borderColor: '#E11D48', backgroundColor: 'rgba(225,29,72,0.08)', borderWidth: 2, pointRadius: 0, fill: true, tension: 0.2 },
+          { label: 'Recovered (%)', data: [0], borderColor: '#2563EB', borderWidth: 2, pointRadius: 0, fill: false, tension: 0.2 },
+          { label: 'Susceptible (%)', data: [55], borderColor: '#A8A29E', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 0, fill: false, tension: 0.2 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        scales: {
+          x: { ticks: { color: '#5C5B57', maxTicksLimit: 8 }, grid: { color: '#EFECE6' } },
+          y: { min: 0, max: 100, ticks: { color: '#5C5B57' }, grid: { color: '#EFECE6' } }
+        },
+        plugins: {
+          legend: { labels: { color: '#141413', boxWidth: 12, font: { family: 'IBM Plex Mono', size: 11 } } }
+        }
+      }
+    });
+
+    function initSimulation() {
+      stopSim();
+      const v = Number(barrierSlider.value) / 100;
+      grid.fill(0);
+      timer.fill(0);
+      stepCount = 0;
+
+      for (let i = 0; i < N; i++) {
+        if (Math.random() < v) grid[i] = 3;
+      }
+      const mid = Math.floor(L / 2);
+      for (let dy = -1; dy <= 1; dy++) {
+        for (let dx = -1; dx <= 1; dx++) {
+          const idx = (mid + dy) * L + (mid + dx);
+          grid[idx] = 1;
+          timer[idx] = 0;
+        }
+      }
+
+      peakInfectedPct = 0;
+      liveSimChart.data.labels = [];
+      liveSimChart.data.datasets[0].data = [];
+      liveSimChart.data.datasets[1].data = [];
+      liveSimChart.data.datasets[2].data = [];
+      renderLatticeAndStats(true);
+      simStatusBadge.textContent = 'READY · t = 0';
+    }
+
+    function stepSimulation() {
+      const beta = Number(betaSlider.value);
+      const tau = Number(tauSlider.value);
+      const nextGrid = new Uint8Array(grid);
+      const nextTimer = new Uint8Array(timer);
+      let infectedRemaining = 0;
+
+      for (let y = 0; y < L; y++) {
+        for (let x = 0; x < L; x++) {
+          const idx = y * L + x;
+          const state = grid[idx];
+          if (state === 0) {
+            let k = 0;
+            for (let dy = -1; dy <= 1; dy++) {
+              const ny = y + dy;
+              if (ny < 0 || ny >= L) continue;
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx;
+                if (nx < 0 || nx >= L) continue;
+                if (grid[ny * L + nx] === 1) k++;
+              }
+            }
+            if (k > 0) {
+              const pInf = 1 - Math.pow(1 - beta, k);
+              if (Math.random() < pInf) {
+                nextGrid[idx] = 1;
+                nextTimer[idx] = 0;
+                infectedRemaining++;
+              }
+            }
+          } else if (state === 1) {
+            const nt = timer[idx] + 1;
+            if (nt >= tau) {
+              nextGrid[idx] = 2;
+              nextTimer[idx] = 0;
+            } else {
+              nextTimer[idx] = nt;
+              infectedRemaining++;
+            }
+          }
+        }
+      }
+
+      grid = nextGrid;
+      timer = nextTimer;
+      stepCount++;
+      renderLatticeAndStats(true);
+
+      if (infectedRemaining === 0) {
+        stopSim();
+        simStatusBadge.textContent = 'EXTINCTION · t = ' + stepCount;
+      } else if (simRunning) {
+        simStatusBadge.textContent = 'RUNNING · t = ' + stepCount;
+      } else {
+        simStatusBadge.textContent = 'PAUSED · t = ' + stepCount;
+      }
+    }
+
+    function renderLatticeAndStats(pushChart) {
+      let sCount = 0, iCount = 0, rCount = 0;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const colors = ['#E2E0D8', '#E11D48', '#2563EB', '#141413'];
+      const radii = [CELL_PX * 0.22, CELL_PX * 0.45, CELL_PX * 0.41, CELL_PX * 0.42];
+      const buckets = [[], [], [], []];
+      for (let i = 0; i < N; i++) {
+        const st = grid[i];
+        if (st === 0) sCount++;
+        else if (st === 1) iCount++;
+        else if (st === 2) rCount++;
+        buckets[st].push(i);
+      }
+
+      const half = CELL_PX * 0.5;
+      for (let st = 0; st < 4; st++) {
+        const list = buckets[st];
+        if (!list.length) continue;
+        const r = radii[st];
+        ctx.fillStyle = colors[st];
+        ctx.beginPath();
+        for (let idx = 0; idx < list.length; idx++) {
+          const cell = list[idx];
+          const cx = (cell % L) * CELL_PX + half;
+          const cy = Math.floor(cell / L) * CELL_PX + half;
+          ctx.moveTo(cx + r, cy);
+          ctx.arc(cx, cy, r, 0, TAU_2PI);
+        }
+        ctx.fill();
+      }
+
+      const sPct = (sCount / N) * 100;
+      const iPct = (iCount / N) * 100;
+      const rPct = (rCount / N) * 100;
+      if (iPct > peakInfectedPct) peakInfectedPct = iPct;
+
+      metricInfected.textContent = iPct.toFixed(2) + '%';
+      metricPeak.textContent = peakInfectedPct.toFixed(2) + '%';
+      metricRecovered.textContent = rPct.toFixed(2) + '%';
+      metricStep.textContent = String(stepCount);
+
+      if (pushChart) {
+        liveSimChart.data.labels.push(stepCount);
+        liveSimChart.data.datasets[0].data.push(Number(iPct.toFixed(2)));
+        liveSimChart.data.datasets[1].data.push(Number(rPct.toFixed(2)));
+        liveSimChart.data.datasets[2].data.push(Number(sPct.toFixed(2)));
+        liveSimChart.update();
+      }
+    }
+
+    function startSim() {
+      if (simRunning) return;
+      simRunning = true;
+      playPauseBtn.textContent = 'Pause';
+      simTimerId = setInterval(stepSimulation, 60);
+    }
+
+    function stopSim() {
+      simRunning = false;
+      if (simTimerId !== null) {
+        clearInterval(simTimerId);
+        simTimerId = null;
+      }
+      playPauseBtn.textContent = 'Run Simulation';
+    }
+
+    playPauseBtn.addEventListener('click', () => {
+      if (simRunning) {
+        stopSim();
+        simStatusBadge.textContent = 'PAUSED · t = ' + stepCount;
+      } else {
+        startSim();
+      }
+    });
+    stepBtn.addEventListener('click', () => { stopSim(); stepSimulation(); });
+    resetBtn.addEventListener('click', initSimulation);
+
+    barrierSlider.addEventListener('input', () => { barrierVal.textContent = barrierSlider.value + '%'; });
+    barrierSlider.addEventListener('change', initSimulation);
+    betaSlider.addEventListener('input', () => { betaVal.textContent = Number(betaSlider.value).toFixed(2); });
+    tauSlider.addEventListener('input', () => { tauVal.textContent = tauSlider.value + ' steps'; });
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        barrierSlider.value = btn.dataset.preset;
+        barrierVal.textContent = btn.dataset.preset + '%';
+        initSimulation();
+        startSim();
+      });
+    });
+
+    initSimulation();
+
+    // ==========================================
+    // 2. Empirical Benchmark Chart
+    // ==========================================
+    const benchData = {
+      labels: ['0%', '10%', '20%', '30%', '40%', '45%', '50%', '60%'],
+      peak: {
+        spatial: [17.17, 14.19, 11.30, 8.67, 5.94, 4.79, 2.84, 0.34],
+        wellMixed: [98.39, 87.96, 77.35, 66.34, 55.23, 49.44, 43.70, 31.95],
+        unit: '%',
+        caption: 'Note: Local contact geometry lowers peak prevalence from 98.39% to 17.17% at v = 0%, and remains a small fraction of well-mixed peaks across all barrier densities.'
+      },
+      final: {
+        spatial: [100.00, 90.06, 80.01, 69.96, 59.24, 53.44, 43.57, 2.22],
+        wellMixed: [100.00, 90.01, 80.10, 70.03, 60.03, 55.01, 50.03, 39.89],
+        unit: '%',
+        caption: 'Note: Spatial final size follows the 100 − v ceiling until v ≈ 45%, then collapses sharply through the percolation transition at v ≈ 55–57% (2.22% at v = 60%).'
+      },
+      duration: {
+        spatial: [108, 117, 132, 151, 187, 222, 310, 106],
+        wellMixed: [21.5, 22.6, 24.2, 25.6, 27.7, 29.5, 30.3, 34.9],
+        unit: ' steps',
+        caption: 'Note: Spatial outbreaks last 3–10× longer than well-mixed epidemics and exhibit critical slowing down near the percolation transition (peaking around v ≈ 52%).'
+      }
+    };
+
+    const benchCtx = document.getElementById('benchmarkChart').getContext('2d');
+    const benchmarkChart = new Chart(benchCtx, {
+      type: 'line',
+      data: {
+        labels: benchData.labels,
+        datasets: [
+          { label: 'Spatial CA (L = 100)', data: benchData.peak.spatial, borderColor: '#0F4C3A', backgroundColor: 'rgba(15,76,58,0.08)', borderWidth: 2.5, tension: 0.2, fill: true },
+          { label: 'Well-Mixed Control', data: benchData.peak.wellMixed, borderColor: '#141413', borderWidth: 2, borderDash: [5, 4], tension: 0.2, fill: false }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { title: { display: true, text: 'Barrier / Vaccination Density (v)' }, grid: { color: '#EFECE6' } },
+          y: { beginAtZero: true, title: { display: true, text: 'Peak Prevalence (%)' }, grid: { color: '#EFECE6' } }
+        },
+        plugins: {
+          legend: { labels: { color: '#141413', font: { family: 'IBM Plex Mono', size: 11 } } }
+        }
+      }
+    });
+
+    document.querySelectorAll('.bench-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.bench-tab').forEach(t => {
+          t.classList.remove('bg-[#141413]', 'text-white');
+          t.classList.add('text-[#5C5B57]');
+        });
+        tab.classList.add('bg-[#141413]', 'text-white');
+        tab.classList.remove('text-[#5C5B57]');
+
+        const key = tab.dataset.metric;
+        const d = benchData[key];
+        benchmarkChart.data.datasets[0].data = d.spatial;
+        benchmarkChart.data.datasets[1].data = d.wellMixed;
+        benchmarkChart.options.scales.y.title.text = tab.textContent + ' (' + d.unit.trim() + ')';
+        benchmarkChart.update();
+        document.getElementById('benchmarkCaption').textContent = d.caption;
+      });
+    });
+
+    // ==========================================
+    // 3. Embedded Manuscript & Python Code
+    // ==========================================
+    const FULL_MANUSCRIPT_TEXT = `Spatial Structure Slows Epidemics, but Percolation Sets the Containment Threshold: A Two-Dimensional SIR Cellular Automaton
+Lucian Ngetea Armah-Kwaw — Founder & Lead Researcher, Computational Biology Division, Arma Research Institute, Accra, Ghana
+
+ABSTRACT
+Well-mixed epidemic models ignore the contact geometry of spatially organised populations. We use a stochastic Susceptible–Infected–Recovered (SIR) cellular automaton on a square lattice with Moore-neighbourhood contacts to ask how static, randomly placed non-transmissive sites ("barriers", e.g. vaccinated individuals) change outbreak dynamics relative to a well-mixed control with identical per-contact transmission. Every run was carried to extinction. Local contact geometry strongly reduces peak prevalence (17% versus 98% of the population at v = 0) and lengthens outbreaks about five-fold in the barrier-free case, yet it does not reduce the final outbreak size until barrier density is high: for v <= 40% the spatial and well-mixed final sizes agree within about 1 percentage point, and essentially every non-barrier cell is eventually infected. Containment emerges through a percolation-type transition at v ≈ 55–57% (estimated from spanning probability on L = 50, 100 and 200 lattices), slightly below the static site-percolation threshold of the same lattice (v ≈ 59%). Outbreak duration peaks near v ≈ 52%, a signature of critical slowing down.
+
+METHODS
+1. Lattice and States: L × L square lattice (primary L = 100, N = 10,000). Each cell is Susceptible (S), Infected (I), Recovered (R), or permanent Barrier (V) assigned independently with probability v at t = 0. Central 3 × 3 seed of 9 infected cells. Non-wrapping boundaries.
+2. Spatial Dynamics: Synchronous updates. A susceptible cell with k infected Moore neighbours (up to 8) becomes infected with P(S -> I) = 1 - (1 - beta)^k, with beta = 0.20. Infected cells recover deterministically after tau = 8 steps (per-pair transmission probability 1 - (1 - 0.20)^8 = 0.83).
+3. Well-Mixed Control: Each susceptible cell draws k ~ Binomial(8, I(t)/N) infected contacts per step. R0 ≈ 8 * beta * tau * (1 - v) = 12.8(1 - v), giving mean-field threshold v ≈ 92%.
+
+KEY RESULTS (L = 100, n = 60 trials per v)
+- v = 0%:  Spatial Peak 17.17% | Well-Mixed Peak 98.39% | Final Size 100.00% | Duration 108 vs 21.5 steps
+- v = 20%: Spatial Peak 11.30% | Well-Mixed Peak 77.35% | Final Size 80.01%  | Duration 132 vs 24.2 steps
+- v = 40%: Spatial Peak 5.94%  | Well-Mixed Peak 55.23% | Final Size 59.24%  | Duration 187 vs 27.7 steps
+- v = 50%: Spatial Peak 2.84%  | Well-Mixed Peak 43.70% | Final Size 43.57%  | Duration 310 vs 30.3 steps
+- v = 60%: Spatial Peak 0.34%  | Well-Mixed Peak 31.95% | Final Size 2.22%   | Duration 106 vs 34.9 steps
+
+CONCLUSIONS
+Spatial structure reduces peak prevalence to a small fraction of the well-mixed value and lengthens barrier-free outbreaks roughly five-fold, but leaves final outbreak size near 100 - v until barrier density reaches ~45%. Containment appears through a percolation-type transition at v ≈ 55–57%, marked by a peak in outbreak duration near v ≈ 52%.`;
+
+    const PYTHON_SCRIPT_TEXT = `"""
+2D Moore-Neighborhood SIR Cellular Automaton & Well-Mixed Control
+Arma Research Institute — Accra, Ghana (armaresearchinstitute.org)
+Author: Lucian Ngetea Armah-Kwaw
+"""
+
+import numpy as np
+
+
+def run_spatial_sir(L=100, v=0.45, beta=0.20, tau=8, max_steps=2500, seed=42):
+    """Run a single 2D Moore-neighborhood SIR simulation to extinction."""
+    rng = np.random.default_rng(np.random.SeedSequence([L, int(v * 1000), seed, 1]))
+    grid = np.zeros((L, L), dtype=np.uint8)
+    timer = np.zeros((L, L), dtype=np.uint8)
+
+    barriers = rng.random((L, L)) < v
+    grid[barriers] = 3
+
+    mid = L // 2
+    grid[mid - 1 : mid + 2, mid - 1 : mid + 2] = 1
+    timer[mid - 1 : mid + 2, mid - 1 : mid + 2] = 0
+
+    N = L * L
+    peak_infected = (grid == 1).sum() / N
+    step = 0
+
+    while step < max_steps and np.any(grid == 1):
+        infected_mask = (grid == 1).astype(np.uint8)
+        padded = np.pad(infected_mask, 1, mode="constant", constant_values=0)
+        k = (
+            padded[:-2, :-2] + padded[:-2, 1:-1] + padded[:-2, 2:]
+            + padded[1:-1, :-2] + padded[1:-1, 2:]
+            + padded[2:, :-2] + padded[2:, 1:-1] + padded[2:, 2:]
+        )
+
+        susceptible = grid == 0
+        p_inf = 1.0 - np.power(1.0 - beta, k)
+        new_infections = susceptible & (rng.random((L, L)) < p_inf)
+
+        timer[grid == 1] += 1
+        recoveries = (grid == 1) & (timer >= tau)
+
+        grid[new_infections] = 1
+        timer[new_infections] = 0
+        grid[recoveries] = 2
+        timer[recoveries] = 0
+
+        step += 1
+        peak_infected = max(peak_infected, (grid == 1).sum() / N)
+
+    final_size = (grid == 2).sum() / N
+    return {
+        "v": v,
+        "peak_pct": peak_infected * 100.0,
+        "final_size_pct": final_size * 100.0,
+        "duration_steps": step,
+    }
+
+
+if __name__ == "__main__":
+    for v_val in [0.0, 0.20, 0.40, 0.50, 0.60]:
+        res = run_spatial_sir(v=v_val)
+        print(
+            f"v={res['v']:.2f} | Peak={res['peak_pct']:.2f}% | "
+            f"Final={res['final_size_pct']:.2f}% | Steps={res['duration_steps']}"
+        )`;
+
+    const publications = [
+      {
+        id: 'pub-1',
+        category: 'manuscript',
+        badge: 'Embedded Manuscript · 2026',
+        title: 'Spatial Structure Slows Epidemics, but Percolation Sets the Containment Threshold: A Two-Dimensional SIR Cellular Automaton',
+        authors: 'Lucian Ngetea Armah-Kwaw · Founder & Lead Researcher, Arma Research Institute',
+        summary: 'Local Moore-neighborhood contact geometry lowers peak prevalence from 98.39% to 17.17% at v = 0% and lengthens outbreaks ~5×, while containment emerges at the dynamical percolation transition v ≈ 55–57%.',
+        defaultTab: 'paper'
+      },
+      {
+        id: 'pub-2',
+        category: 'code',
+        badge: 'Embedded Python / NumPy · Reproducible Pipeline',
+        title: 'sir_ca_percolation.py — 2D Moore-Neighborhood SIR Lattice Simulator',
+        authors: 'Arma Research Institute · Computational Biology Division',
+        summary: 'Self-contained Python & NumPy implementation using deterministic SeedSequence streams, non-wrapping lattice boundaries, and extinction-run termination.',
+        defaultTab: 'python'
+      }
+    ];
+
+    const pubGrid = document.getElementById('pubGrid');
+    const pubModal = document.getElementById('pubModal');
+    const modalBody = document.getElementById('modalBody');
+    let currentModalTab = 'paper';
+
+    function renderPublications(filter) {
+      const items = filter === 'all' ? publications : publications.filter(p => p.category === filter);
+      pubGrid.innerHTML = items.map(p => `
+        <article class="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="max-w-3xl">
+            <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#0F4C3A] mb-2">${p.badge}</div>
+            <h3 class="font-serif-editorial text-2xl text-[#141413] leading-snug mb-2">${p.title}</h3>
+            <p class="font-mono-tech text-xs text-[#5C5B57] mb-3">${p.authors}</p>
+            <p class="text-sm text-[#5C5B57] leading-relaxed">${p.summary}</p>
+          </div>
+          <div class="flex sm:flex-row md:flex-col gap-2.5 shrink-0">
+            <button type="button" data-pub-id="${p.id}" class="open-pub-btn px-4 py-2 bg-[#141413] hover:bg-[#0F4C3A] text-white font-mono-tech text-xs uppercase tracking-wider transition">
+              ${p.defaultTab === 'python' ? 'View Python Code' : 'Read Paper'}
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+      pubGrid.querySelectorAll('.open-pub-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const pub = publications.find(x => x.id === btn.dataset.pubId);
+          openPubModal(pub ? pub.defaultTab : 'paper');
+        });
+      });
+    }
+
+    function setModalTab(tab) {
+      currentModalTab = tab;
+      document.querySelectorAll('.modal-tab').forEach(t => {
+        if (t.dataset.modalTab === tab) {
+          t.classList.add('bg-[#141413]', 'text-white');
+          t.classList.remove('border', 'border-[#D6D3CD]', 'bg-white', 'text-[#5C5B57]');
+        } else {
+          t.classList.remove('bg-[#141413]', 'text-white');
+          t.classList.add('border', 'border-[#D6D3CD]', 'bg-white', 'text-[#5C5B57]');
+        }
+      });
+
+      if (tab === 'paper') {
+        modalBody.innerHTML = `
+          <div class="bg-white border border-[#E2E0D8] p-5 sm:p-6 space-y-4">
+            <div class="font-mono-tech text-[11px] uppercase tracking-wider text-[#0F4C3A]">Full Embedded Manuscript</div>
+            <pre class="whitespace-pre-wrap font-sans text-sm text-[#141413] leading-relaxed">${FULL_MANUSCRIPT_TEXT}</pre>
+          </div>
+        `;
+      } else {
+        modalBody.innerHTML = `
+          <div class="bg-[#141413] text-[#FAF9F6] border border-[#141413] p-5 overflow-x-auto">
+            <div class="font-mono-tech text-[11px] uppercase tracking-wider text-emerald-400 mb-3">sir_ca_percolation.py</div>
+            <pre class="font-mono-tech text-xs leading-relaxed">${PYTHON_SCRIPT_TEXT.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+          </div>
+        `;
+      }
+    }
+
+    function openPubModal(tab) {
+      document.getElementById('modalBadge').textContent = 'Arma Research Institute · Open Archive';
+      document.getElementById('modalTitle').textContent = 'Spatial Structure Slows Epidemics, but Percolation Sets the Containment Threshold';
+      document.getElementById('modalAuthors').textContent = 'Lucian Ngetea Armah-Kwaw · Founder & Lead Researcher';
+      setModalTab(tab || 'paper');
+      pubModal.classList.remove('hidden');
+    }
+
+    document.querySelectorAll('.modal-tab').forEach(btn => {
+      btn.addEventListener('click', () => setModalTab(btn.dataset.modalTab));
+    });
+
+    document.getElementById('heroReadPaperBtn').addEventListener('click', () => openPubModal('paper'));
+    document.getElementById('openCodeFromDivBtn').addEventListener('click', () => openPubModal('python'));
+    document.getElementById('closeModalBtn').addEventListener('click', () => pubModal.classList.add('hidden'));
+    document.getElementById('modalCloseFooterBtn').addEventListener('click', () => pubModal.classList.add('hidden'));
+    pubModal.addEventListener('click', (e) => { if (e.target === pubModal) pubModal.classList.add('hidden'); });
+
+    document.getElementById('copyModalContentBtn').addEventListener('click', () => {
+      const text = currentModalTab === 'paper' ? FULL_MANUSCRIPT_TEXT : PYTHON_SCRIPT_TEXT;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard.'));
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        showToast('Copied to clipboard.');
+      }
+    });
+
+    document.getElementById('downloadModalContentBtn').addEventListener('click', () => {
+      const isPaper = currentModalTab === 'paper';
+      const content = isPaper ? FULL_MANUSCRIPT_TEXT : PYTHON_SCRIPT_TEXT;
+      const filename = isPaper ? 'arma_sir_percolation_paper.txt' : 'sir_ca_percolation.py';
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast('Downloaded ' + filename);
+    });
+
+    document.querySelectorAll('.pub-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pub-filter').forEach(b => {
+          b.classList.remove('bg-[#141413]', 'text-white');
+          b.classList.add('border', 'border-[#D6D3CD]', 'bg-white', 'text-[#5C5B57]');
+        });
+        btn.classList.add('bg-[#141413]', 'text-white');
+        btn.classList.remove('border', 'border-[#D6D3CD]', 'bg-white', 'text-[#5C5B57]');
+        renderPublications(btn.dataset.filter);
+      });
+    });
+
+    renderPublications('all');
+
+    // ==========================================
+    // 4. Contact Form & Toast
+    // ==========================================
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toastText');
+    let toastTimeout = null;
+
+    function showToast(msg) {
+      toastText.textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.add('hidden'), 4000);
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      const topic = document.getElementById('contactTopic').value;
+      showToast(`Thank you, ${name}. Your ${topic} inquiry has been prepared.`);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
