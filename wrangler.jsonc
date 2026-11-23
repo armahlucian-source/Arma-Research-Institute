@@ -1,11 +1,7 @@
 {
-  // ...
-  "observability": {
-    "logs": {
-      "enabled": true,
-      "invocation_logs": true,
-      "persist": true
-    }
-  },
-  // ...
+  "name": "your-project-name",
+  "compatibility_date": "2026-11-23",
+  "assets": {
+    "directory": "./dist"
+  }
 }
